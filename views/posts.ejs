@@ -1,0 +1,17 @@
+<%- include("partials/header.ejs") %>
+
+<main>
+  <h1>Write a Post</h1>
+  <form action="/posts" method="POST">
+    <label for="postContent">Post Content:</label>
+    <textarea id="postContent" name="postContent" rows="10" style="width: 100%; max-width: 600px; min-width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+      <% if (typeof content !== 'undefined') { %>
+        <%= content %>
+      <% } %>
+    </textarea>
+    <input type="hidden" name="editId" value="<%= editId || '' %>"> <!-- Hidden input for the post ID -->
+    <button type="submit"><%= editId ? 'Update' : 'Submit' %></button>
+  </form>
+</main>
+
+<%- include("partials/footer.ejs") %>

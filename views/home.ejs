@@ -1,0 +1,25 @@
+<%- include("partials/header.ejs") %>
+
+<main>
+  <h1>Your Posts</h1>
+  <ul>
+    <% if (posts.length > 0) { %>
+      <% posts.forEach(function(post) { %>
+        <li>
+          <p><%= post.content %></p>
+          <form action="/delete-post" method="POST" style="display:inline;">
+            <input type="hidden" name="postId" value="<%= post.id %>">
+            <button type="submit">Delete</button>
+          </form>
+          <a href="/posts?editId=<%= post.id %>&content=<%= encodeURIComponent(post.content) %>">
+            <button>Edit</button>
+          </a>
+        </li>
+      <% }) %>
+    <% } else { %>
+      <p>No posts yet. Go to "Write a Post" to create one!</p>
+    <% } %>
+  </ul>
+</main>
+
+<%- include("partials/footer.ejs") %>
