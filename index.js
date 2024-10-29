@@ -13,6 +13,10 @@ app.get("/home", (req, res) => {
   res.render("home", { posts });
 });
 
+app.get("/", (req, res) => {
+  res.render("home", { posts });
+});
+
 // Posts page - Write a new post or edit existing one
 app.get("/posts", (req, res) => {
   const editId = req.query.editId ? parseInt(req.query.editId) : null;

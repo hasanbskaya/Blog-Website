@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Writing Website</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#posts">Write a Post</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <!-- Home Section -->
+    <section id="home">
+        <h1>Your Posts</h1>
+        <ul id="postList">
+            <!-- Example posts; this can be dynamically generated with JavaScript if needed -->
+            <li>Post 1 <button onclick="editPost('Post 1')">Edit</button> <button onclick="deletePost('Post 1')">Delete</button></li>
+            <li>Post 2 <button onclick="editPost('Post 2')">Edit</button> <button onclick="deletePost('Post 2')">Delete</button></li>
+        </ul>
+    </section>
+
+    <!-- Posts Section -->
+    <section id="posts">
+        <h1>Write a Post</h1>
+        <form id="postForm">
+            <label for="postContent">Post Content:</label>
+            <textarea id="postContent" name="postContent" rows="10" style="width: 100%; max-width: 600px; min-width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+            <button type="button" onclick="submitPost()">Submit</button>
+        </form>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h1>About</h1>
+        <p>This is a simple blog writing website where you can create, edit, and delete posts.</p>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; <span id="currentYear"></span> Your Name. All rights reserved.</p>
+</footer>
+
+<script>
+    // JavaScript to handle post submissions
+    function submitPost() {
+        const content = document.getElementById('postContent').value;
+        if (content) {
+            const postList = document.getElementById('postList');
+            const newPost = document.createElement('li');
+            newPost.innerHTML = `${content} <button onclick="editPost('${content}')">Edit</button> <button onclick="deletePost('${content}')">Delete</button>`;
+            postList.appendChild(newPost);
+            document.getElementById('postContent').value = ''; // Clear the textarea
+        }
+    }
+
+    function editPost(postContent) {
+        document.getElementById('postContent').value = postContent; // Populate the textarea with the post content for editing
+    }
+
+    function deletePost(postContent) {
+        const postList = document.getElementById('postList');
+        const posts = postList.getElementsByTagName('li');
+        for (let i = 0; i < posts.length; i++) {
+            if (posts[i].innerText.includes(postContent)) {
+                postList.removeChild(posts[i]); // Remove the post from the list
+                break;
+            }
+        }
+    }
+
+    // Set the current year in the footer
+    document.getElementById('currentYear').innerText = new Date().getFullYear();
+</script>
+
+</body>
+</html>
